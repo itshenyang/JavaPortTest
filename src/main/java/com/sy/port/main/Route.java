@@ -3,7 +3,11 @@ package com.sy.port.main;
 /**
  * Created by Administrator on 2017/10/10.
  */
-public class Route {
+/**
+ *转发任务的配置数据对象模板
+ **/
+
+ public class Route {
 
     public Route() {}
     //jPortMap绑定的IP

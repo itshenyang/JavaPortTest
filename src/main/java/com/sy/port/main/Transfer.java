@@ -8,10 +8,6 @@ import java.net.Socket;
 /**
  * Title: 端口转发器
  * Description: 对连结进行转发处理
- * Copyright: Copyright (c) 2005
- * Company: www.NetJava.org
- * @author javafound
- * @version 1.0
  */
 
 public class Transfer extends Thread {

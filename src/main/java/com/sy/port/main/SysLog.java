@@ -1,5 +1,7 @@
 package com.sy.port.main;
 
+import com.sy.port.utils.L;
+
 import java.io.File;
 import java.io.RandomAccessFile;
 import java.util.Calendar;
@@ -7,21 +9,24 @@ import java.util.Calendar;
 /**
  * Created by Administrator on 2017/10/10.
  */
-
+/**
+ * Title: 端口转发器
+ * Description:日志工具类
+ */
 
 public class SysLog {
 
     //记录输出一般信息
     public  static void info(String s) {
-        writeToTodayLog("INFO  :", s);
+        L.i(s);
     }
     ////记录警告信息
     public   static void warning(String s) {
-        writeToTodayLog("WARN:", s);
+        L.w(s);
     }
     //记录错误信息
     public   static void severe(String s) {
-        writeToTodayLog("ERROR:", s);
+         L.f(s);
     }
     //输出到当天日志文件的具体实现
     private static void writeToTodayLog(String flag, String msg) {

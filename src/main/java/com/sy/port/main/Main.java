@@ -12,10 +12,6 @@ import java.util.Properties;
 /**
  * Title: 端口转发器
  * Description:启动主类：读取配置，启动监听服务
- * Copyright: Copyright (c) 2005
- * Company: www.NetJava.org
- * @author javafound
- * @version 1.0
  */
 
 public class Main {
