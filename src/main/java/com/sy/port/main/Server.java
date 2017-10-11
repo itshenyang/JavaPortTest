@@ -15,7 +15,7 @@ import java.util.Vector;
 /**
  * Created by Administrator on 2017/10/10.
  */
-public class Server extends Thread{
+public class Server extends Thread {
 
 
     //创建一个转发服务器
@@ -25,17 +25,20 @@ public class Server extends Thread{
         myID = id;
         start();
     }
+
     //关闭这个服务器：
     public void closeServer() {
         isStop = true;
         if (null != myServer) {
             closeServerSocket();
-        } while (this.connectionQueue.size() > 0) {
+        }
+        while (this.connectionQueue.size() > 0) {
             Transfer tc = (Transfer) connectionQueue.remove(0);
             tc.closeSocket(tc.socket);
             tc = null;
         }
     }
+
     //启动转发服务器的执行线程
     public void run() {
         SysLog.info(" start Transfer......:" + route.toString());
@@ -72,6 +75,7 @@ public class Server extends Thread{
             }
         }
     }
+
     //检测进入的IP是否己许可
     private static boolean checkIP(Route route, String inIP) {
         String[] inI = string2StringArray(inIP, ".");
@@ -89,6 +93,7 @@ public class Server extends Thread{
         }
         return true;
     }
+
     /*
      * @param srcString 原字符串
      * @param separator 分隔符
@@ -114,6 +119,7 @@ public class Server extends Thread{
         } catch (Exception ef) {
         }
     }
+
     private void closeSocket(Socket s) {
         try {
             s.close();
@@ -131,6 +137,6 @@ public class Server extends Thread{
     // 路由对象
     private Route route = null;
     //连结的ID号，暂未用
-    private static int  myID = 0;
+    private static int myID = 0;
 
 }

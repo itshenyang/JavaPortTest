@@ -1,9 +1,5 @@
 package com.sy.port.utils;
 
-import com.sy.port.main.Main;
-
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -15,21 +11,21 @@ import java.util.Properties;
  */
 public class ReadPropertiesUtils {
 
-    public static List<String> LocalIP =new ArrayList<>();
+    public static List<String> LocalIP = new ArrayList<>();
 
-    public static List<Integer> LocalPort=new ArrayList<>();
+    public static List<Integer> LocalPort = new ArrayList<>();
 
-    public static List<String> DestHost=new ArrayList<>();
+    public static List<String> DestHost = new ArrayList<>();
 
 
-    public static List<Integer> DestPort=new ArrayList<>();
+    public static List<Integer> DestPort = new ArrayList<>();
 
-    public static List<String> AllowClient=new ArrayList<>();
+    public static List<String> AllowClient = new ArrayList<>();
 
 
     static {
         Properties prop = new Properties();
-        InputStream in = Object. class .getResourceAsStream( "/port_config.properties" );
+        InputStream in = Object.class.getResourceAsStream("/port_config.properties");
         try {
             prop.load(in);
             for (int i = 1; i < 100; i++) {

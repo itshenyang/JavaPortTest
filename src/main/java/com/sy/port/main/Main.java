@@ -2,12 +2,8 @@ package com.sy.port.main;
 
 import com.sy.port.utils.ReadPropertiesUtils;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 /**
  * Title: 端口转发器
@@ -23,8 +19,9 @@ public class Main {
     public static void startService() {
         if (!loadCfgFile()) {
             System.exit(1);
-        } while (serverList.size() > 0) {
-            Server ts =   serverList.remove(0);
+        }
+        while (serverList.size() > 0) {
+            Server ts = serverList.remove(0);
             ts.closeServer();
         }
         for (int i = 0; i < routeList.size(); i++) {
@@ -33,6 +30,7 @@ public class Main {
             serverList.add(server);
         }
     }
+
     // 停止服务接口,备用其它模块调用
     public static void stop() {
         while (serverList.size() > 0) {
@@ -40,9 +38,11 @@ public class Main {
             ts.closeServer();
         }
     }
+
     /**
-     *从配置文件读取数据，生成Route对象
+     * 从配置文件读取数据，生成Route对象
      * read cfg parameter
+     *
      * @return boolean
      */
     private static boolean loadCfgFile() {
@@ -58,10 +58,10 @@ public class Main {
             //Properties pt = new Properties();
             //pt.load(is);
             //共有几个业务模块
-            for(int i =0;i< ReadPropertiesUtils.LocalIP.size();i++){
+            for (int i = 0; i < ReadPropertiesUtils.LocalIP.size(); i++) {
                 Route r = new Route();
                 r.LocalIP = ReadPropertiesUtils.LocalIP.get(i);//pt.getProperty("LocalIP." + ServiceCount).trim();
-                r.LocalPort =ReadPropertiesUtils.LocalPort.get(i); //Integer.parseInt(pt.getProperty("LocalPort." +  ServiceCount).trim());
+                r.LocalPort = ReadPropertiesUtils.LocalPort.get(i); //Integer.parseInt(pt.getProperty("LocalPort." +  ServiceCount).trim());
                 r.DestHost = ReadPropertiesUtils.DestHost.get(i);//pt.getProperty("DestHost." + ServiceCount).trim();
                 r.DestPort = ReadPropertiesUtils.DestPort.get(i);//Integer.parseInt(pt.getProperty("DestPort." + ServiceCount).trim());
                 r.AllowClient = ReadPropertiesUtils.AllowClient.get(i);//pt.getProperty("AllowClient." + ServiceCount).  trim();
@@ -69,19 +69,19 @@ public class Main {
             }
 
 
-
             //is.close();
             SysLog.info("ystem Read cfg file OK");
         } catch (Exception e) {
             e.printStackTrace();
-            System.out.println("找不到配置文件:"+e);
+            System.out.println("找不到配置文件:" + e);
             SysLog.severe("loadCfgFile false :" + e);
             return false;
         }
         return true;
     }
+
     //Server服务器集合
-    private static List< Server> serverList = new ArrayList();
+    private static List<Server> serverList = new ArrayList();
     //Route集合
-    private static List< Route> routeList = new ArrayList();
+    private static List<Route> routeList = new ArrayList();
 }

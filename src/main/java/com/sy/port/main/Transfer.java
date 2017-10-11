@@ -13,7 +13,8 @@ import java.net.Socket;
 public class Transfer extends Thread {
     /**
      * 创建传输对象
-     * @param s Socket   :进入的socket
+     *
+     * @param s     Socket   :进入的socket
      * @param route Route:转发配置
      */
     public Transfer(Socket s, Route route) {
@@ -21,6 +22,7 @@ public class Transfer extends Thread {
         this.socket = s;
         this.start();
     }
+
     // 执行操作的线程
     public void run() {
         Socket outbound = null;
@@ -32,19 +34,19 @@ public class Transfer extends Thread {
             OutputStream os = outbound.getOutputStream();
             pipe(is, outbound.getInputStream(), os, socket.getOutputStream());
         } catch (Exception e) {
-            SysLog.severe(" transfer error:" +route.toString()+ " :" + e);
+            SysLog.severe(" transfer error:" + route.toString() + " :" + e);
         } finally {
-            SysLog.warning("Disconnect :"+ route.toString());
+            SysLog.warning("Disconnect :" + route.toString());
             closeSocket(outbound);
             closeSocket(socket);
         }
     }
 
     /**
-     *传输的实现方法
+     * 传输的实现方法
      */
-    private   void pipe(InputStream is0, InputStream is1,
-                        OutputStream os0, OutputStream os1) {
+    private void pipe(InputStream is0, InputStream is1,
+                      OutputStream os0, OutputStream os1) {
         try {
             int ir;
             byte bytes[] = new byte[BUFSIZ];
@@ -55,7 +57,8 @@ public class Transfer extends Thread {
                     } else if (ir < 0) {
                         break;
                     }
-                } catch (InterruptedIOException e) {}
+                } catch (InterruptedIOException e) {
+                }
                 try {
                     if ((ir = is1.read(bytes)) > 0) {
                         os1.write(bytes, 0, ir);
@@ -63,13 +66,15 @@ public class Transfer extends Thread {
                     } else if (ir < 0) {
                         break;
                     }
-                } catch (InterruptedIOException e) {}
+                } catch (InterruptedIOException e) {
+                }
             }
         } catch (Exception e0) {
             SysLog.warning(" Method pipe" + this.route.toString() + " error:" +
                     e0);
         }
     }
+
     //关闭socket
     void closeSocket(Socket s) {
         try {
@@ -77,6 +82,7 @@ public class Transfer extends Thread {
         } catch (Exception ef) {
         }
     }
+
     //传输任务的Route对象
     Route route = null;
     // 传入数据用的Socket
